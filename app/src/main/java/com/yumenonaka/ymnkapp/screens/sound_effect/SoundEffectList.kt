@@ -33,4 +33,5 @@ val soundEffects = listOf(
     SoundEffect("ねっ", "shiori_ne.mp3"),
     SoundEffect("おっぱいいいい", "oppai.mp3"),
     SoundEffect("ごめんなさい", "gomennnasai1.mp3"),
+    SoundEffect("ばぶ～～", "babuuu.mp3")
 )
