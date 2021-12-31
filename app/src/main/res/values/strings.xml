@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">夢の中アプリ</string>
+    <string name="schedule">予定表</string>
+    <string name="sound_effect">サウンド</string>
+    <string name="kushami">くしゃみ</string>
+    <string name="nko">NKO</string>
+    <string name="external_link">外部リンク</string>
+    <string name="open_with">プログラムから開く</string>
+    <string name="visit_site">サイトへ</string>
+    <string name="twitter">ツイッター</string>
+    <string name="youtube">Youtube</string>
+    <string name="bilibili">ビリビリ</string>
+    <string name="twitcasting_old">ツイキャス (旧)</string>
+    <string name="twitcasting_new">ツイキャス (新)</string>
+    <string name="niconico">ニコニコ</string>
+    <string name="fanbox_r18">FANBOX</string>
+    <string name="fanbox_all">FANBOX (全年龄)</string>
+    <string name="cien">Ci-en</string>
+    <string name="booth">BOOTH</string>
+    <string name="fantia">Fantia</string>
+    <string name="fc2">FC2</string>
+</resources>

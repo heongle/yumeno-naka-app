@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">梦之乡App</string>
+    <string name="schedule">时间表</string>
+    <string name="sound_effect">音效</string>
+    <string name="kushami">大姐喷嚏</string>
+    <string name="nko">NKO</string>
+    <string name="external_link">外部链接</string>
+    <string name="open_with">打开方式</string>
+    <string name="visit_site">前往</string>
+
+    <string name="twitter">推特</string>
+    <string name="youtube">Youtube</string>
+    <string name="bilibili">哔哩哔哩</string>
+    <string name="twitcasting_old">TwitCasting (旧)</string>
+    <string name="twitcasting_new">TwitCasting (新)</string>
+    <string name="niconico">N站</string>
+    <string name="fanbox_r18">FANBOX</string>
+    <string name="fanbox_all">FANBOX (全年齢)</string>
+    <string name="cien">Ci-en</string>
+    <string name="booth">BOOTH</string>
+    <string name="fantia">Fantia</string>
+    <string name="fc2">FC2</string>
+</resources>

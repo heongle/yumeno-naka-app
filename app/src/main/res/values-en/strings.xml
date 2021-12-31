@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yumeno Naka App</string>
+    <string name="schedule">Schedule</string>
+    <string name="sound_effect">Sound Effect</string>
+    <string name="kushami">Kushami</string>
+    <string name="nko">NKO</string>
+    <string name="external_link">External Link</string>
+    <string name="open_with">Open With</string>
+    <string name="visit_site">Visit</string>
+    <string name="twitter">Twitter</string>
+    <string name="youtube">Youtube</string>
+    <string name="bilibili">Bilibili</string>
+    <string name="twitcasting_old">TwitCasting (old)</string>
+    <string name="twitcasting_new">TwitCasting (new)</string>
+    <string name="niconico">Niconico</string>
+    <string name="fanbox_r18">FANBOX</string>
+    <string name="fanbox_all">FANBOX (All Ages)</string>
+    <string name="cien">Ci-en</string>
+    <string name="booth">BOOTH</string>
+    <string name="fantia">Fantia</string>
+    <string name="fc2">FC2</string>
+</resources>
