@@ -78,7 +78,7 @@ dependencies {
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation ("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation (kotlin("script-runtime"))
-
+    implementation ("androidx.annotation:annotation-experimental:1.2.0")
     // navigation
     // Java language implementation
     implementation("androidx.navigation:navigation-fragment:$navVersion")
