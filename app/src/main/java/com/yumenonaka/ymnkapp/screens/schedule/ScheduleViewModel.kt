@@ -12,10 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
 
 class ScheduleViewModel : ViewModel() {
-    private val _isRefreshing = MutableStateFlow(false)
     private val _recentScheduleDataState = MutableStateFlow<LinkedHashMap<String, ArrayList<RecentScheduleItem>>?>(null)
     val recentScheduleDataState: StateFlow<LinkedHashMap<String, ArrayList<RecentScheduleItem>>?> = _recentScheduleDataState
-    val isRefreshing: StateFlow<Boolean> = _isRefreshing
     var dateKeySet: List<String>? = null
 
     init {

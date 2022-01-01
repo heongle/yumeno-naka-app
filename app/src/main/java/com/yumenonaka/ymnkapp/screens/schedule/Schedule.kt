@@ -41,7 +41,7 @@ fun Schedule(scheduleViewModel: ScheduleViewModel = viewModel(), lifecycleOwner:
     if (recentScheduleDataState.value == null) {
         ShioriLoading()
     } else {
-        ScheduleList(onSwipe = { scheduleViewModel.refresh() }, parsedScheduleItem = recentScheduleDataState.value!!, dateKeySet = dateKeySet!!)
+        ScheduleList(onSwipe = scheduleViewModel::refresh, parsedScheduleItem = recentScheduleDataState.value!!, dateKeySet = dateKeySet!!)
     }
 }
 
