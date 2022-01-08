@@ -5,6 +5,7 @@ plugins {
 }
 val composeVersion = rootProject.extra.get("compose_version").toString()
 val navVersion = "2.4.0-rc01"
+val ktorVersion = "1.6.7"
 android {
     compileSdk = 31
 
@@ -68,8 +69,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation ("androidx.activity:activity-compose:1.4.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     implementation ("com.google.dagger:hilt-android:2.38.1")
     implementation ("com.google.accompanist:accompanist-swiperefresh:0.22.0-rc")
     testImplementation ("junit:junit:4.13.2")
@@ -92,4 +92,8 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$navVersion")
+    // Ktor client
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    implementation("io.ktor:ktor-client-serialization:$ktorVersion")
 }
