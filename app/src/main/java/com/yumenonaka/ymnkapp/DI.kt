@@ -9,7 +9,9 @@ import io.ktor.client.request.*
 object DI {
     val httpClient = HttpClient(OkHttp) {
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                ignoreUnknownKeys = true
+            })
         }
         defaultRequest {
             header("Accept", "application/json")
