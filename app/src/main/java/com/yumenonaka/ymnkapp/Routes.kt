@@ -2,13 +2,13 @@ package com.yumenonaka.ymnkapp
 
 import android.content.Context
 import com.yumenonaka.ymnkapp.models.app.RouteData
-import com.yumenonaka.ymnkapp.screens.birthday_counter.BirthdayCounter
+import com.yumenonaka.ymnkapp.screens.birthdaycounter.BirthdayCounter
 import com.yumenonaka.ymnkapp.screens.links.Links
 import com.yumenonaka.ymnkapp.screens.schedule.Schedule
-import com.yumenonaka.ymnkapp.screens.sound_effect.SoundEffectButtons
-import com.yumenonaka.ymnkapp.screens.sound_effect.kushamiEffects
-import com.yumenonaka.ymnkapp.screens.sound_effect.nkoEffects
-import com.yumenonaka.ymnkapp.screens.sound_effect.soundEffects
+import com.yumenonaka.ymnkapp.screens.soundeffect.SoundEffectButtons
+import com.yumenonaka.ymnkapp.screens.soundeffect.kushamiEffects
+import com.yumenonaka.ymnkapp.screens.soundeffect.nkoEffects
+import com.yumenonaka.ymnkapp.screens.soundeffect.soundEffects
 
 object RouteName {
     const val schedule = "schedule"

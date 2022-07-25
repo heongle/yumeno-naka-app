@@ -1,4 +1,4 @@
-package com.yumenonaka.ymnkapp.screens.birthday_counter
+package com.yumenonaka.ymnkapp.screens.birthdaycounter
 
 import android.content.Context
 import android.graphics.BitmapFactory

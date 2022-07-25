@@ -1,4 +1,4 @@
-package com.yumenonaka.ymnkapp.screens.sound_effect
+package com.yumenonaka.ymnkapp.screens.soundeffect
 
 import com.yumenonaka.ymnkapp.models.app.SoundEffect
 

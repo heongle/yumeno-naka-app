@@ -1,4 +1,4 @@
-package com.yumenonaka.ymnkapp.screens.birthday_counter
+package com.yumenonaka.ymnkapp.screens.birthdaycounter
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
