@@ -1,13 +1,13 @@
 package com.yumenonaka.ymnkapp.utility
 
-import com.yumenonaka.ymnkapp.models.app.DateTime
+import com.yumenonaka.ymnkapp.models.app.DateTimeDiff
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 
-fun getShioriBirthdayDiff(birthdayInstant: Instant, currentInstant: Instant, zoneId: ZoneId): DateTime {
+fun getShioriBirthdayDiff(birthdayInstant: Instant, currentInstant: Instant, zoneId: ZoneId): DateTimeDiff {
     val currentZonedDateTime = ZonedDateTime.ofInstant(currentInstant, zoneId)
     val birthdayZonedDateTime = ZonedDateTime
         .ofInstant(birthdayInstant, zoneId)
@@ -17,7 +17,7 @@ fun getShioriBirthdayDiff(birthdayInstant: Instant, currentInstant: Instant, zon
         .plusMonths(if(currentZonedDateTime.dayOfMonth < birthdayZonedDateTime.dayOfMonth) 0 else 1)
     val differenceInTime = nextBirthdayZonedDateTime.toEpochSecond() - currentZonedDateTime.toEpochSecond()
 
-    return DateTime (
+    return DateTimeDiff (
         days = ((differenceInTime / (60 * 60 * 24)) % 365).toInt(),
         hours = ((differenceInTime / (60 * 60)) % 24).toInt(),
         minutes = ((differenceInTime / 60) % 60).toInt(),
