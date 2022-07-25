@@ -1,36 +1,34 @@
 package com.yumenonaka.ymnkapp.screens.schedule
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.yumenonaka.ymnkapp.components.*
+import com.yumenonaka.ymnkapp.components.FrameScheduleDescription
+import com.yumenonaka.ymnkapp.components.LabelSchedule
+import com.yumenonaka.ymnkapp.components.ShioriLoading
+import com.yumenonaka.ymnkapp.components.TextScheduleDate
 import com.yumenonaka.ymnkapp.models.request.RecentSchedule
 import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
 import com.yumenonaka.ymnkapp.utility.parseScheduleData
-import com.yumenonaka.ymnkapp.utility.playSoundEffect
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 @Composable
-fun Schedule(scheduleViewModel: ScheduleViewModel = viewModel(), lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current) {
-    val recentScheduleDataState = scheduleViewModel.recentScheduleDataState.collectAsState()
-    val dateKeySet = scheduleViewModel.dateKeySet
-
+fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current) {
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_START) {
-                scheduleViewModel.onStart()
+                scheduleViewState.onStart()
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -38,10 +36,11 @@ fun Schedule(scheduleViewModel: ScheduleViewModel = viewModel(), lifecycleOwner:
             lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
-    if (recentScheduleDataState.value == null) {
+
+    if (scheduleViewState.recentScheduleDataState == null) {
         ShioriLoading()
     } else {
-        ScheduleList(onSwipe = scheduleViewModel::refresh, parsedScheduleItem = recentScheduleDataState.value!!, dateKeySet = dateKeySet!!)
+        ScheduleList(onSwipe = scheduleViewState::refresh, parsedScheduleItem = scheduleViewState.recentScheduleDataState!!, dateKeySet = scheduleViewState.dateKeySet!!)
     }
 }
 
@@ -54,9 +53,8 @@ private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<
             for (i in dateKeySet.indices) {
                 val scheduleDate: String = dateKeySet[i]
                 val scheduleItems: ArrayList<RecentScheduleItem> = parsedScheduleItem[scheduleDate]!!
-                val scheduleItemsCount: Int = scheduleItems.size
                 TextScheduleDate(scheduleDate = scheduleDate)
-                for (j in 0 until scheduleItemsCount) {
+                for (j in 0 until scheduleItems.size) {
                     ScheduleItem(scheduleItem = scheduleItems[j])
                 }
             }
@@ -68,11 +66,13 @@ private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<
 private fun ScheduleItem(scheduleItem: RecentScheduleItem) {
     var isDescShowing by remember { mutableStateOf(false) }
     val scheduleTime: String = if(scheduleItem.startTime != null) scheduleItem.startTime + "  " else ""
-    val scheduleTitle: String = scheduleTime + scheduleItem.eventName
-    val scheduleDescription: String = scheduleItem.description ?: "N/A"
-    LabelSchedule(text = scheduleTitle) { isDescShowing = !isDescShowing }
-    if(isDescShowing) {
-        FrameScheduleDescription(scheduleDescription)
+    LabelSchedule(text = scheduleTime + scheduleItem.eventName) { isDescShowing = !isDescShowing }
+    AnimatedVisibility(
+        visible = isDescShowing,
+        enter = slideInVertically{ 0 } + expandVertically() + fadeIn(),
+        exit = slideOutVertically{ 0 } + shrinkVertically() + fadeOut()
+    ) {
+        FrameScheduleDescription(scheduleItem.description ?: "N/A")
     }
 }
 
