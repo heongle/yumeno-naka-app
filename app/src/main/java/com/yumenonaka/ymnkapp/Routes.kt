@@ -1,7 +1,8 @@
 package com.yumenonaka.ymnkapp
 
-import android.content.Context
-import com.yumenonaka.ymnkapp.models.app.RouteData
+import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavBackStackEntry
 import com.yumenonaka.ymnkapp.screens.birthdaycounter.BirthdayCounter
 import com.yumenonaka.ymnkapp.screens.links.Links
 import com.yumenonaka.ymnkapp.screens.schedule.Schedule
@@ -10,22 +11,25 @@ import com.yumenonaka.ymnkapp.screens.soundeffect.kushamiEffects
 import com.yumenonaka.ymnkapp.screens.soundeffect.nkoEffects
 import com.yumenonaka.ymnkapp.screens.soundeffect.soundEffects
 
-object RouteName {
-    const val schedule = "schedule"
-    const val birthdayCountdown = "birthday-countdown"
-    const val soundEffect = "sound-effect"
-    const val kushami = "sound-effect-kushami"
-    const val nko = "sound-effect-nko"
-    const val externalLinks = "external-links"
+sealed class Screen(
+    val route: String,
+    @StringRes val resourceId: Int,
+    val content: @Composable (NavBackStackEntry) -> Unit,
+    val needDivide: Boolean = false
+) {
+    object Schedule : Screen("schedule", R.string.schedule, { Schedule() })
+    object BirthdayCountdown : Screen("birthday-countdown", R.string.birthday_countdown, { BirthdayCounter() }, true)
+    object SoundEffect : Screen("sound-effect", R.string.sound_effect, { SoundEffectButtons(soundEffects) })
+    object Kushami : Screen("sound-effect-kushami", R.string.kushami, { SoundEffectButtons(kushamiEffects) })
+    object NKO : Screen("sound-effect-nko", R.string.nko, { SoundEffectButtons(nkoEffects) }, true)
+    object ExternalLink : Screen("external-links", R.string.external_link, { Links() })
 }
 
-fun getRoutes(context: Context): List<RouteData> {
-    return listOf(
-        RouteData(context.getString(R.string.schedule), RouteName.schedule) { Schedule() },
-        RouteData(context.getString(R.string.birthday_countdown), RouteName.birthdayCountdown, needDivide = true) { BirthdayCounter() },
-        RouteData(context.getString(R.string.sound_effect), RouteName.soundEffect) { SoundEffectButtons(soundEffects) },
-        RouteData(context.getString(R.string.kushami), RouteName.kushami) { SoundEffectButtons(kushamiEffects) },
-        RouteData(context.getString(R.string.nko), RouteName.nko, needDivide = true) { SoundEffectButtons(nkoEffects) },
-        RouteData(context.getString(R.string.external_link), RouteName.externalLinks) { Links() }
-    )
-}
+val routes = listOf(
+    Screen.Schedule,
+    Screen.BirthdayCountdown,
+    Screen.SoundEffect,
+    Screen.Kushami,
+    Screen.NKO,
+    Screen.ExternalLink
+)
