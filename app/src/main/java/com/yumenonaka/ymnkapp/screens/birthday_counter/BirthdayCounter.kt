@@ -60,7 +60,7 @@ private fun CounterText(text: String) {
 private fun RemainingTimeCounter(currentInstant: Instant) {
     val context = LocalContext.current
     val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstant, ZoneId.of("Asia/Tokyo"))
-    CounterText(context.getString(R.string.birthday_countdown))
+    CounterText(context.getString(R.string.until_next_birthday))
     CounterText(
         text = "${dt.days}${context.getString(R.string.days)} " +
                 "${dt.hours}${context.getString(R.string.hours)} " +
