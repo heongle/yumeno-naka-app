@@ -1,11 +1,14 @@
 plugins {
     id ("com.android.application")
     id ("kotlin-android")
-    kotlin("plugin.serialization") version "1.6.0"
+    kotlin("plugin.serialization") version "1.7.0"
 }
-val composeVersion = rootProject.extra.get("compose_version").toString()
-val navVersion = "2.4.0-rc01"
-val ktorVersion = "1.6.7"
+
+val composeCompilerVersion: String by project
+val composeVersion: String by project
+val navVersion: String by project
+val ktorVersion: String by project
+//val composeVersion = rootProject.extra.get("compose_version").toString()
 android {
     compileSdk = 31
 
@@ -47,7 +50,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
+        kotlinCompilerExtensionVersion = composeCompilerVersion
     }
     packagingOptions {
         resources {
@@ -57,15 +60,14 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.core:core-ktx:1.7.0")
-    implementation ("androidx.appcompat:appcompat:1.4.0")
-    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("androidx.core:core-ktx:1.8.0")
+    implementation ("androidx.appcompat:appcompat:1.4.2")
+    implementation ("com.google.android.material:material:1.6.1")
     implementation ("androidx.compose.ui:ui:$composeVersion")
     implementation ("androidx.compose.material:material:$composeVersion")
     implementation ("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation ("androidx.activity:activity-compose:1.4.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.0")
+    implementation ("androidx.activity:activity-compose:1.5.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     implementation ("com.google.dagger:hilt-android:2.38.1")
     implementation ("com.google.accompanist:accompanist-swiperefresh:0.22.0-rc")
