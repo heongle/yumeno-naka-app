@@ -11,3 +11,4 @@
 ### [Jetpack Compose](https://developer.android.com/jetpack/compose)
 ### [Accompanist](https://github.com/google/accompanist)
 ### [OkHttp 4.9.1](https://square.github.io/okhttp/)
+### [Ktor 2.0.3](https://ktor.io/)
