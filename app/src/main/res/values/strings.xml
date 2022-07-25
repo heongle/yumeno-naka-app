@@ -5,6 +5,7 @@
     <string name="kushami">くしゃみ</string>
     <string name="nko">NKO</string>
     <string name="external_link">外部リンク</string>
+    <string name="birthday_countdown">誕生日カウントダウン</string>
     <string name="open_with">プログラムから開く</string>
     <string name="visit_site">サイトへ</string>
     <string name="twitter">ツイッター</string>
@@ -19,4 +20,10 @@
     <string name="booth">BOOTH</string>
     <string name="fantia">Fantia</string>
     <string name="fc2">FC2</string>
+    <string name="until_next_birthday">次の誕生日まであと</string>
+    <string name="million_age_counter">一億〇カウンター</string>
+    <string name="days">日</string>
+    <string name="hours">時間</string>
+    <string name="minutes">分</string>
+    <string name="seconds">秒</string>
 </resources>

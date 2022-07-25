@@ -6,6 +6,7 @@
     <string name="kushami">大姐噴嚏</string>
     <string name="nko">NKO</string>
     <string name="external_link">外部鏈接</string>
+    <string name="birthday_countdown">生日倒數</string>
     <string name="open_with">打開方式</string>
     <string name="visit_site">前往</string>
     <string name="twitter">推特</string>
@@ -19,5 +20,10 @@
     <string name="cien">Ci-en</string>
     <string name="booth">BOOTH</string>
     <string name="fantia">Fantia</string>
-    <string name="fc2">FC2</string>
+    <string name="until_next_birthday">直到下次生日還有</string>
+    <string name="million_age_counter">一億〇計數器</string>
+    <string name="days">天</string>
+    <string name="hours">小時</string>
+    <string name="minutes">分鐘</string>
+    <string name="seconds">秒</string>
 </resources>

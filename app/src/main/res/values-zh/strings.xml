@@ -6,9 +6,9 @@
     <string name="kushami">大姐喷嚏</string>
     <string name="nko">NKO</string>
     <string name="external_link">外部链接</string>
+    <string name="birthday_countdown">生日倒数</string>
     <string name="open_with">打开方式</string>
     <string name="visit_site">前往</string>
-
     <string name="twitter">推特</string>
     <string name="youtube">Youtube</string>
     <string name="bilibili">哔哩哔哩</string>
@@ -21,4 +21,10 @@
     <string name="booth">BOOTH</string>
     <string name="fantia">Fantia</string>
     <string name="fc2">FC2</string>
+    <string name="until_next_birthday">直到下次生日还有</string>
+    <string name="million_age_counter">一亿〇计数器</string>
+    <string name="days">天</string>
+    <string name="hours">小时</string>
+    <string name="minutes">分钟</string>
+    <string name="seconds">秒</string>
 </resources>

@@ -6,6 +6,7 @@
     <string name="kushami">Kushami</string>
     <string name="nko">NKO</string>
     <string name="external_link">External Link</string>
+    <string name="birthday_countdown">Birthday Countdown</string>
     <string name="open_with">Open With</string>
     <string name="visit_site">Visit</string>
     <string name="twitter">Twitter</string>
@@ -20,4 +21,10 @@
     <string name="booth">BOOTH</string>
     <string name="fantia">Fantia</string>
     <string name="fc2">FC2</string>
+    <string name="until_next_birthday">Until next Birthday</string>
+    <string name="million_age_counter">Age Counter</string>
+    <string name="days">day</string>
+    <string name="hours">hr</string>
+    <string name="minutes">min</string>
+    <string name="seconds">s</string>
 </resources>

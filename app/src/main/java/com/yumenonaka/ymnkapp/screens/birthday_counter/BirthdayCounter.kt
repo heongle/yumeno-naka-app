@@ -1,0 +1,84 @@
+package com.yumenonaka.ymnkapp.screens.birthday_counter
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.yumenonaka.ymnkapp.R
+import com.yumenonaka.ymnkapp.data.ShioriProfile
+import com.yumenonaka.ymnkapp.utility.getShioriAging
+import com.yumenonaka.ymnkapp.utility.getShioriBirthdayDiff
+import java.time.Instant
+import java.time.ZoneId
+
+@Composable
+fun BirthdayCounter(birthdayCounterViewState: BirthdayCounterState = rememberBirthdayCounterState()) {
+    Box {
+        Image(
+            bitmap = birthdayCounterViewState.img,
+            contentDescription = "",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillHeight
+        )
+        Row(
+            modifier = Modifier.fillMaxSize().background(Color(0,0,0,90)),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                RemainingTimeCounter(birthdayCounterViewState.currentInstant)
+                Spacer(modifier = Modifier.size(28.dp))
+                AgeCounter(birthdayCounterViewState.currentInstant)
+            }
+        }
+    }
+}
+
+@Composable
+private fun CounterText(text: String) {
+    Text(
+        color = Color.White,
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Bold,
+        text = text
+    )
+}
+
+@Composable
+private fun RemainingTimeCounter(currentInstant: Instant) {
+    val context = LocalContext.current
+    val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstant, ZoneId.of("Asia/Tokyo"))
+    CounterText(context.getString(R.string.birthday_countdown))
+    CounterText(
+        text = "${dt.days}${context.getString(R.string.days)} " +
+                "${dt.hours}${context.getString(R.string.hours)} " +
+                "${dt.minutes}${context.getString(R.string.minutes)} " +
+                "${dt.seconds}${context.getString(R.string.seconds)}"
+    )
+}
+
+@Composable
+private fun AgeCounter(currentInstant: Instant) {
+    val context = LocalContext.current
+    val totalAge = ShioriProfile.initialAge + getShioriAging(ShioriProfile.firstBirthdayInstant, currentInstant)
+    CounterText(context.getString(R.string.million_age_counter))
+    CounterText("$totalAge")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TestBirthdayCounter() {
+    BirthdayCounter()
+}
