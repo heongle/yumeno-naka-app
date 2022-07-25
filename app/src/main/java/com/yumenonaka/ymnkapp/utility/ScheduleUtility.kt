@@ -1,6 +1,8 @@
 package com.yumenonaka.ymnkapp.utility
 import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
 
+val scheduleHtmlRegex = Regex("(</?u>|</?html-blob>|</?b>|</?i>)")
+
 fun parseScheduleData(data: ArrayList<RecentScheduleItem>): LinkedHashMap<String, ArrayList<RecentScheduleItem>> {
     var curDate: String = data[0].eventDate // Get the first element date
     val parsedData: LinkedHashMap<String, ArrayList<RecentScheduleItem>> = LinkedHashMap() // Prepare the map to store processed data
@@ -17,4 +19,8 @@ fun parseScheduleData(data: ArrayList<RecentScheduleItem>): LinkedHashMap<String
     }
     parsedData[curDate] = ArrayList(items) // Add the last schedule item into the map
     return parsedData
+}
+
+fun parseScheduleDescription(desc: String): String {
+    return desc.replace(scheduleHtmlRegex, "")
 }

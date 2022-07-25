@@ -20,6 +20,7 @@ import com.yumenonaka.ymnkapp.components.TextScheduleDate
 import com.yumenonaka.ymnkapp.models.request.RecentSchedule
 import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
 import com.yumenonaka.ymnkapp.utility.parseScheduleData
+import com.yumenonaka.ymnkapp.utility.parseScheduleDescription
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
@@ -72,7 +73,7 @@ private fun ScheduleItem(scheduleItem: RecentScheduleItem) {
         enter = slideInVertically{ 0 } + expandVertically() + fadeIn(),
         exit = slideOutVertically{ 0 } + shrinkVertically() + fadeOut()
     ) {
-        FrameScheduleDescription(scheduleItem.description ?: "N/A")
+        FrameScheduleDescription(parseScheduleDescription(scheduleItem.description ?: "N/A"))
     }
 }
 
