@@ -1,20 +1,22 @@
 package com.yumenonaka.ymnkapp
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
 
 object DI {
     val httpClient = HttpClient(OkHttp) {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+        install(ContentNegotiation) {
+            json(Json {
                 ignoreUnknownKeys = true
             })
         }
         defaultRequest {
-            header("Accept", "application/json")
+            header(HttpHeaders.Accept, "application/json")
         }
     }
 }
