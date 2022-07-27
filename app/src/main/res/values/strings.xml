@@ -6,6 +6,7 @@
     <string name="nko">NKO</string>
     <string name="external_link">外部リンク</string>
     <string name="birthday_countdown">誕生日カウントダウン</string>
+    <string name="weekly_schedule">週間予定表</string>
     <string name="open_with">プログラムから開く</string>
     <string name="visit_site">サイトへ</string>
     <string name="twitter">ツイッター</string>
@@ -26,4 +27,8 @@
     <string name="hours">時間</string>
     <string name="minutes">分</string>
     <string name="seconds">秒</string>
+    <string name="need_permission_to_save_image">画像を保存する権限が必要</string>
+    <string name="save">保存</string>
+    <string name="saved_unsuccessfully">保存失敗しました</string>
+    <string name="saved_successfully">保存しました</string>
 </resources>

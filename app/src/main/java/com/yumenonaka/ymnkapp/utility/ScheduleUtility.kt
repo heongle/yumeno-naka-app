@@ -24,3 +24,7 @@ fun parseScheduleData(data: ArrayList<RecentScheduleItem>): LinkedHashMap<String
 fun parseScheduleDescription(desc: String): String {
     return desc.replace(scheduleHtmlRegex, "")
 }
+
+fun extractImageFileName(path: String): String? {
+    return Regex("[^/]+.(jpg|png)\$").find(path)?.value
+}

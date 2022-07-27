@@ -7,6 +7,7 @@
     <string name="nko">NKO</string>
     <string name="external_link">External Link</string>
     <string name="birthday_countdown">Birthday Countdown</string>
+    <string name="weekly_schedule">Weekly Schedule</string>
     <string name="open_with">Open With</string>
     <string name="visit_site">Visit</string>
     <string name="twitter">Twitter</string>
@@ -27,4 +28,8 @@
     <string name="hours">hr</string>
     <string name="minutes">min</string>
     <string name="seconds">s</string>
+    <string name="need_permission_to_save_image">Need permission to save image</string>
+    <string name="save">Save</string>
+    <string name="saved_unsuccessfully">Failed to save</string>
+    <string name="saved_successfully">Saved Successfully</string>
 </resources>

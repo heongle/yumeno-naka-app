@@ -10,6 +10,7 @@ import com.yumenonaka.ymnkapp.screens.soundeffect.SoundEffectButtons
 import com.yumenonaka.ymnkapp.screens.soundeffect.kushamiEffects
 import com.yumenonaka.ymnkapp.screens.soundeffect.nkoEffects
 import com.yumenonaka.ymnkapp.screens.soundeffect.soundEffects
+import com.yumenonaka.ymnkapp.screens.weeklyschedule.WeeklySchedule
 
 sealed class Screen(
     val route: String,
@@ -18,6 +19,7 @@ sealed class Screen(
     val needDivide: Boolean = false
 ) {
     object Schedule : Screen("schedule", R.string.schedule, { Schedule() })
+    object WeeklySchedule : Screen("weekly-schedule", R.string.weekly_schedule, { WeeklySchedule() })
     object BirthdayCountdown : Screen("birthday-countdown", R.string.birthday_countdown, { BirthdayCounter() }, true)
     object SoundEffect : Screen("sound-effect", R.string.sound_effect, { SoundEffectButtons(soundEffects) })
     object Kushami : Screen("sound-effect-kushami", R.string.kushami, { SoundEffectButtons(kushamiEffects) })
@@ -27,6 +29,7 @@ sealed class Screen(
 
 val routes = listOf(
     Screen.Schedule,
+    Screen.WeeklySchedule,
     Screen.BirthdayCountdown,
     Screen.SoundEffect,
     Screen.Kushami,

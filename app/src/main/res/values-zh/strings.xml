@@ -7,6 +7,7 @@
     <string name="nko">NKO</string>
     <string name="external_link">外部链接</string>
     <string name="birthday_countdown">生日倒数</string>
+    <string name="weekly_schedule">一周时间表</string>
     <string name="open_with">打开方式</string>
     <string name="visit_site">前往</string>
     <string name="twitter">推特</string>
@@ -27,4 +28,8 @@
     <string name="hours">小时</string>
     <string name="minutes">分钟</string>
     <string name="seconds">秒</string>
+    <string name="need_permission_to_save_image">需权限保存图像</string>
+    <string name="save">保存</string>
+    <string name="saved_unsuccessfully">保存失败</string>
+    <string name="saved_successfully">保存成功</string>
 </resources>

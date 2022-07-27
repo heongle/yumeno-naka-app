@@ -1,5 +1,6 @@
 package com.yumenonaka.ymnkapp.components
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,6 +32,21 @@ fun LabelSchedule(text: String, onClick: ()-> Unit) {
                 .padding(vertical = 2.dp),
             text = text
         )
+    }
+}
+
+@Composable
+fun ButtonSchedule(onClick: ()-> Unit, content: @Composable RowScope.() -> Unit) {
+    Button(
+        modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
+        colors= ButtonDefaults.buttonColors(
+            backgroundColor = Color(0xff8e24aa),
+            contentColor = Color.White
+        ),
+        shape = RoundedCornerShape(15.dp),
+        onClick = onClick
+    ) {
+        content()
     }
 }
 
