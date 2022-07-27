@@ -9,7 +9,6 @@ fun getSites(context: Context): List<ExternalSite> {
         ExternalSite(context.getString(R.string.twitter), "https://twitter.com/Yumeno_Shiori"),
         ExternalSite(context.getString(R.string.youtube), "https://www.youtube.com/channel/UCH0ObmokE-zUOeihkKwWySA"),
         ExternalSite(context.getString(R.string.bilibili), "https://space.bilibili.com/372984197/"),
-        ExternalSite(context.getString(R.string.twitcasting_old), "https://ja.twitcasting.tv/c:yumeno_shiori"),
         ExternalSite(context.getString(R.string.twitcasting_new), "https://ja.twitcasting.tv/yumeno_shiori"),
         ExternalSite(context.getString(R.string.niconico), "https://ch.nicovideo.jp/yumenoshiori"),
         ExternalSite(context.getString(R.string.fc2), "https://live.fc2.com/78847652/"),
