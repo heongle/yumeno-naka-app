@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id ("com.android.application")
     id ("kotlin-android")
@@ -8,6 +11,9 @@ val composeCompilerVersion: String by project
 val composeVersion: String by project
 val navVersion: String by project
 val ktorVersion: String by project
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdk = 31
@@ -25,13 +31,22 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release-sign") {
+            keyAlias = keystoreProperties["keyAlias"]!! as String
+            keyPassword = keystoreProperties["keyPassword"]!! as String
+            storeFile = file(keystoreProperties["storeFile"]!! as String)
+            storePassword = keystoreProperties["storePassword"]!! as String
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "YMNK_API_URL", "\"https://www.yumeno-naka.moe/yumeno_api\"")
             buildConfigField("String", "YMNK_CDN_URL", "\"https://cdn.yumeno-naka.moe\"")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release-sign")
         }
 
         debug {
@@ -41,6 +56,7 @@ android {
             buildConfigField("String", "YMNK_CDN_URL", "\"https://cdn.yumeno-naka.moe\"")
         }
     }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
