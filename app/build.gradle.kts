@@ -43,7 +43,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "YMNK_API_URL", "\"https://www.yumeno-naka.moe/yumeno_api\"")
             buildConfigField("String", "YMNK_CDN_URL", "\"https://cdn.yumeno-naka.moe\"")
             signingConfig = signingConfigs.getByName("release-sign")
