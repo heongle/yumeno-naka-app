@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.serialization") version "1.7.0"
 }
 
+val appVersion: String by project
 val composeCompilerVersion: String by project
 val composeVersion: String by project
 val navVersion: String by project
@@ -23,7 +24,7 @@ android {
         minSdk = 24
         targetSdk = 31
         versionCode = 1
-        versionName = "1.3.0"
+        versionName = appVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,10 +34,17 @@ android {
 
     signingConfigs {
         create("release-sign") {
-            keyAlias = keystoreProperties["keyAlias"]!! as String
-            keyPassword = keystoreProperties["keyPassword"]!! as String
-            storeFile = file(keystoreProperties["storeFile"]!! as String)
-            storePassword = keystoreProperties["storePassword"]!! as String
+            if(System.getenv()["CI"] == "true") {
+                keyAlias = System.getenv()["CM_KEY_ALIAS"]
+                keyPassword = System.getenv()["CM_KEY_PASSWORD"]
+                storeFile = file(System.getenv()["CM_KEYSTORE_PATH"]!!)
+                storePassword = System.getenv()["CM_KEYSTORE_PASSWORD"]
+            } else {
+                keyAlias = keystoreProperties["keyAlias"]!! as String
+                keyPassword = keystoreProperties["keyPassword"]!! as String
+                storeFile = file(keystoreProperties["storeFile"]!! as String)
+                storePassword = keystoreProperties["storePassword"]!! as String
+            }
         }
     }
 

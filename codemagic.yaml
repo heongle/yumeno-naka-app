@@ -1,0 +1,49 @@
+workflows:
+  my-workflow:
+    name: Build Yumeno Naka App
+    instance_type: mac_mini
+    max_build_duration: 60
+    environment:
+      groups:
+        - ymnk_app_credentials
+        - github_acc
+      vars:
+        APP_VERSION: v1.3.1
+      java: 11
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: master
+          include: true
+          source: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Setup local properties
+        script: echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+      - name: Set up key.properties file for code signing
+        script: |
+          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
+          cat >> "$CM_BUILD_DIR/keystore.properties" <<EOF
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyPassword=$CM_KEY_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          storeFile=$CM_KEYSTORE_PATH
+          EOF
+      - name: Build Android app
+        script: |
+          chmod +x gradlew
+          ./gradlew assembleRelease
+    artifacts:
+      - app/build/outputs/**/**/*.apk
+    publishing:
+      scripts:
+        - name: "Publish to github"
+          script: |
+            gh release create "${APP_VERSION}" \
+                --title "Yumeno Naka App ${APP_VERSION}" \
+                app/build/outputs/apk/release/app-release.apk
