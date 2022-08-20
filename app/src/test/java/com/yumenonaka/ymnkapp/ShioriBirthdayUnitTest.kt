@@ -14,7 +14,7 @@ import java.time.ZoneId
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class ShioriBirthdayUnitTest {
     @Test
     fun shiori_birthday_correctly_parsed() {
         val dt = getShioriBirthdayDiff(Instant.ofEpochSecond(ShioriProfile.firstBirthdayEpoch), Instant.ofEpochSecond(1658698224), ZoneId.of("Asia/Tokyo"))

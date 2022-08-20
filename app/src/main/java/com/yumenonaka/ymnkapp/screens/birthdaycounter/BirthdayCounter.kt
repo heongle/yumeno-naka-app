@@ -38,9 +38,9 @@ fun BirthdayCounter(birthdayCounterViewState: BirthdayCounterState = rememberBir
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                RemainingTimeCounter(birthdayCounterViewState.currentInstant)
+                RemainingTimeCounter { birthdayCounterViewState.currentInstant }
                 Spacer(modifier = Modifier.size(28.dp))
-                AgeCounter(birthdayCounterViewState.currentInstant)
+                AgeCounter { birthdayCounterViewState.currentInstant }
             }
         }
     }
@@ -57,9 +57,9 @@ private fun CounterText(text: String) {
 }
 
 @Composable
-private fun RemainingTimeCounter(currentInstant: Instant) {
+private fun RemainingTimeCounter(currentInstantProvider: () -> Instant) {
     val context = LocalContext.current
-    val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstant, ZoneId.of("Asia/Tokyo"))
+    val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstantProvider(), ZoneId.of("Asia/Tokyo"))
     CounterText(context.getString(R.string.until_next_birthday))
     CounterText(
         text = "${dt.days}${context.getString(R.string.days)} " +
@@ -70,9 +70,9 @@ private fun RemainingTimeCounter(currentInstant: Instant) {
 }
 
 @Composable
-private fun AgeCounter(currentInstant: Instant) {
+private fun AgeCounter(currentInstantProvider: () -> Instant) {
     val context = LocalContext.current
-    val totalAge = ShioriProfile.initialAge + getShioriAging(ShioriProfile.firstBirthdayInstant, currentInstant)
+    val totalAge = ShioriProfile.initialAge + getShioriAging(ShioriProfile.firstBirthdayInstant, currentInstantProvider())
     CounterText(context.getString(R.string.million_age_counter))
     CounterText("$totalAge")
 }
