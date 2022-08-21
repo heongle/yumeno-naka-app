@@ -3,21 +3,21 @@ import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
 
 val scheduleHtmlRegex = Regex("(</?u>|</?html-blob>|</?b>|</?i>)")
 
-fun parseScheduleData(data: ArrayList<RecentScheduleItem>): LinkedHashMap<String, ArrayList<RecentScheduleItem>> {
+fun parseScheduleData(data: List<RecentScheduleItem>): LinkedHashMap<String, List<RecentScheduleItem>> {
     var curDate: String = data[0].eventDate // Get the first element date
-    val parsedData: LinkedHashMap<String, ArrayList<RecentScheduleItem>> = LinkedHashMap() // Prepare the map to store processed data
-    val items: ArrayList<RecentScheduleItem> = ArrayList() // The array list to store list of schedule for particular date (same date)
+    val parsedData = linkedMapOf<String, List<RecentScheduleItem>>() // Prepare the map to store processed data
+    val items = mutableListOf<RecentScheduleItem>() // The array list to store list of schedule for particular date (same date)
     items.add(data[0]) // Add first element
     for (i in 1 until data.size) {
         val newDate = data[i].eventDate
         if (curDate != newDate) {
-            parsedData[curDate] = ArrayList(items) // if date changed then put all the schedule items into the corresponding date
+            parsedData[curDate] = items.toList() // if date changed then copy all the schedule items into the corresponding date
             curDate = newDate // date changed so update the current date
             items.clear() // clear the items if date changed
         }
         items.add(data[i])
     }
-    parsedData[curDate] = ArrayList(items) // Add the last schedule item into the map
+    parsedData[curDate] = items.toList() // Copy the last schedule item into the map
     return parsedData
 }
 

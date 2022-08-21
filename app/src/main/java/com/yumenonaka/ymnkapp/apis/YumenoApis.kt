@@ -10,7 +10,7 @@ import io.ktor.client.request.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-suspend fun getRecentSchedule(): ArrayList<RecentScheduleItem> {
+suspend fun getRecentSchedule(): List<RecentScheduleItem> {
     return withContext(Dispatchers.IO) {
         httpClient.get("$YMNK_API_URL/recentEvent").body<RecentSchedule>().data
     }

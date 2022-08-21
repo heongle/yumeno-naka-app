@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RecentSchedule(
     val count: Int,
-    val data: ArrayList<RecentScheduleItem>,
+    val data: List<RecentScheduleItem>,
 )
 
 @Serializable

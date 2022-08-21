@@ -46,17 +46,17 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
 }
 
 @Composable
-private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<String, ArrayList<RecentScheduleItem>>, dateKeySet: List<String>) {
+private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<String, List<RecentScheduleItem>>, dateKeySet: List<String>) {
     SwipeRefresh(state = rememberSwipeRefreshState(false), onRefresh = onSwipe) {
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
             for (i in dateKeySet.indices) {
                 val scheduleDate: String = dateKeySet[i]
-                val scheduleItems: ArrayList<RecentScheduleItem> = parsedScheduleItem[scheduleDate]!!
+                val scheduleItems: List<RecentScheduleItem> = parsedScheduleItem[scheduleDate]!!
                 TextScheduleDate(scheduleDate = scheduleDate)
-                for (j in 0 until scheduleItems.size) {
-                    ScheduleItem(scheduleItem = scheduleItems[j])
+                for (scheduleItem in scheduleItems) {
+                    ScheduleItem(scheduleItem = scheduleItem)
                 }
             }
         }

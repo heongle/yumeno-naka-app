@@ -15,7 +15,7 @@ fun rememberScheduleState(coroutineScope: CoroutineScope = rememberCoroutineScop
 }
 
 class ScheduleState(val coroutineScope: CoroutineScope) {
-    var recentScheduleDataState by mutableStateOf<LinkedHashMap<String, ArrayList<RecentScheduleItem>>?>(null)
+    var recentScheduleDataState by mutableStateOf<LinkedHashMap<String, List<RecentScheduleItem>>?>(null)
         private set
     var dateKeySet: List<String>? = null
 
@@ -24,7 +24,7 @@ class ScheduleState(val coroutineScope: CoroutineScope) {
             try {
                 val recentSchedule = getRecentSchedule()
                 val parsedSchedule = parseScheduleData(recentSchedule)
-                dateKeySet = ArrayList(parsedSchedule.keys)
+                dateKeySet = parsedSchedule.keys.toList()
                 recentScheduleDataState = parsedSchedule
             } catch (e: IOException) {
                 e.printStackTrace()
