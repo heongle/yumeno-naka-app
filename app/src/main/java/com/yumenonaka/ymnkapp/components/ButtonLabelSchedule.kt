@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,10 +20,6 @@ fun LabelSchedule(text: String, onClick: ()-> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
-        colors= ButtonDefaults.buttonColors(
-            containerColor = Color(0xff8e24aa),
-            contentColor = Color.White
-        ),
         shape = RoundedCornerShape(15.dp),
         onClick = onClick
     ) {
@@ -39,10 +36,6 @@ fun LabelSchedule(text: String, onClick: ()-> Unit) {
 fun ButtonSchedule(onClick: ()-> Unit, content: @Composable RowScope.() -> Unit) {
     Button(
         modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
-        colors= ButtonDefaults.buttonColors(
-            containerColor = Color(0xff8e24aa),
-            contentColor = Color.White
-        ),
         shape = RoundedCornerShape(15.dp),
         onClick = onClick
     ) {

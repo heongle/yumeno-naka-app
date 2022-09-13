@@ -1,13 +1,16 @@
 package com.yumenonaka.ymnkapp.screens.schedule
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -59,6 +62,7 @@ private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<
                     ScheduleItem(scheduleItem = scheduleItem)
                 }
             }
+            Box(modifier = Modifier.height(150.dp))
         }
     }
 }

@@ -21,13 +21,16 @@ import com.yumenonaka.ymnkapp.R
 fun CardVisitPage(title: String, url: String) {
     val context = LocalContext.current
     Card(
-        modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.onSecondary
+        ),
+        modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 9.dp, vertical = 3.dp),
+                .padding(horizontal = 12.dp, vertical = 4.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
