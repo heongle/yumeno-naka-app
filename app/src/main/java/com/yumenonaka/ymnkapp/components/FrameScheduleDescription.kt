@@ -4,8 +4,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +20,7 @@ fun FrameScheduleDescription(description: String) {
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
         shape = RoundedCornerShape(15.dp),
-        backgroundColor = Color(0xfff2ebf5),
+        colors = CardDefaults.cardColors(containerColor = Color(0xfff2ebf5)),
         border = BorderStroke(2.dp, Color(0xff606060))
     ) {
         Text(

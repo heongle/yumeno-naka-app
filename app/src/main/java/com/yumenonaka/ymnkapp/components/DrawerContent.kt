@@ -2,10 +2,9 @@ package com.yumenonaka.ymnkapp.components
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,37 +26,38 @@ import kotlinx.coroutines.launch
 
 private val drawerImageList = listOf("img1", "img2", "img3", "img4", "img5", "img6", "img7", "img8", "img9", "img10", "img11", "img12", "img13")
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Drawer(navController: NavHostController, scaffoldState: ScaffoldState, coroutineScope: CoroutineScope) {
+fun Drawer(navController: NavHostController, drawerState: DrawerState, coroutineScope: CoroutineScope) {
     val context = LocalContext.current
     val headerImages = drawerImageList.map { BitmapFactory.decodeStream(context.assets.openFd("drawer/${it}.jpg").createInputStream()).asImageBitmap() }
-    Column {
-        DrawerHeaderImage(scaffoldState, headerImages)
-        DrawerContent(navController, scaffoldState, coroutineScope)
+    ModalDrawerSheet {
+        DrawerHeaderImage(drawerState, headerImages)
+        DrawerContent(navController, drawerState, coroutineScope)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DrawerContent(navController: NavHostController, scaffoldState: ScaffoldState, coroutineScope: CoroutineScope) {
+fun DrawerContent(navController: NavHostController, drawerState: DrawerState, coroutineScope: CoroutineScope) {
     val context = LocalContext.current
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 8.dp)
+        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
         routes.map { route ->
-            ButtonMenu(
-                text = context.getString(route.resourceId),
+            NavigationDrawerItem(
+                label = { Text(context.getString(route.resourceId)) },
+                selected = navBackStackEntry?.destination?.route == route.route,
                 onClick = {
                     navController.navigate(route.route) {
                         popUpTo(navController.graph.findStartDestination().id)
                     }
                     coroutineScope.launch {
-                        scaffoldState.drawerState.close()
+                        drawerState.close()
                     }
                 },
-                selected = navBackStackEntry?.destination?.route == route.route
+                modifier = Modifier.padding(vertical = 4.dp).height(40.dp)
             )
             if(route.needDivide) {
                 Divider()
@@ -66,14 +66,15 @@ fun DrawerContent(navController: NavHostController, scaffoldState: ScaffoldState
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DrawerHeaderImage(scaffoldState: ScaffoldState, headerImages: List<ImageBitmap>) {
+private fun DrawerHeaderImage(drawerState: DrawerState, headerImages: List<ImageBitmap>) {
     val prevState = remember { mutableStateOf(DrawerValue.Closed) }
     val showingImg = remember { mutableStateOf(headerImages.random()) }
-    if(scaffoldState.drawerState.isClosed && scaffoldState.drawerState.currentValue != prevState.value) {
+    if(drawerState.isClosed && drawerState.currentValue != prevState.value) {
         showingImg.value = headerImages.random()
     }
-    prevState.value = scaffoldState.drawerState.currentValue
+    prevState.value = drawerState.currentValue
     Image(bitmap = showingImg.value, contentDescription = "")
 }
 
@@ -81,12 +82,12 @@ private fun DrawerHeaderImage(scaffoldState: ScaffoldState, headerImages: List<I
 private fun ButtonMenu(text: String, onClick: () -> Unit, selected: Boolean) {
     val buttonColors = if(selected) {
         ButtonDefaults.textButtonColors(
-            backgroundColor = MaterialTheme.colors.secondary,
-            contentColor = MaterialTheme.colors.primary
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.primary
         )
     } else {
         ButtonDefaults.textButtonColors(
-            backgroundColor = Color.Transparent,
+            containerColor = Color.Transparent,
             contentColor = Color.Black
         )
     }

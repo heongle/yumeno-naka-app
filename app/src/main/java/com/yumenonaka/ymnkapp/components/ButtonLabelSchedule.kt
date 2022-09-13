@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +20,7 @@ fun LabelSchedule(text: String, onClick: ()-> Unit) {
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
         colors= ButtonDefaults.buttonColors(
-            backgroundColor = Color(0xff8e24aa),
+            containerColor = Color(0xff8e24aa),
             contentColor = Color.White
         ),
         shape = RoundedCornerShape(15.dp),
@@ -40,7 +40,7 @@ fun ButtonSchedule(onClick: ()-> Unit, content: @Composable RowScope.() -> Unit)
     Button(
         modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
         colors= ButtonDefaults.buttonColors(
-            backgroundColor = Color(0xff8e24aa),
+            containerColor = Color(0xff8e24aa),
             contentColor = Color.White
         ),
         shape = RoundedCornerShape(15.dp),

@@ -3,9 +3,9 @@ package com.yumenonaka.ymnkapp.components
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +22,7 @@ fun CardVisitPage(title: String, url: String) {
     val context = LocalContext.current
     Card(
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
-        elevation = 6.dp
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Row(
             modifier = Modifier
@@ -37,7 +37,7 @@ fun CardVisitPage(title: String, url: String) {
             )
             Button(
                 colors= ButtonDefaults.buttonColors(
-                    backgroundColor = Color(0xff44393d),
+                    containerColor = Color(0xff44393d),
                     contentColor = Color.White
                 ),
                 onClick = {
