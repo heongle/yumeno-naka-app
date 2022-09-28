@@ -6,6 +6,7 @@
     <string name="kushami">Kushami</string>
     <string name="nko">NKO</string>
     <string name="external_link">External Link</string>
+    <string name="soine_player">Sleeping Sound</string>
     <string name="birthday_countdown">Birthday Countdown</string>
     <string name="weekly_schedule">Weekly Schedule</string>
     <string name="open_with">Open With</string>
@@ -32,4 +33,10 @@
     <string name="save">Save</string>
     <string name="saved_unsuccessfully">Failed to save</string>
     <string name="saved_successfully">Saved Successfully</string>
+    <string name="suyasuya_channel">Sleeping Sound</string>
+    <string name="suyasuya_channel_description">This notification show when shiori sleeping sound is playing</string>
+    <string name="suyasuya">( ˘ω˘)zZZ</string>
+    <string name="playing_soine_sound">Playing Shiori sleeping sound</string>
+    <string name="sleep">Sleep</string>
+    <string name="wake_up">Wake Up</string>
 </resources>

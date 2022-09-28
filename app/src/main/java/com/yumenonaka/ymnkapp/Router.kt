@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 fun Router(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "schedule") {
         routes.map { route ->
-            composable(route.route, content = route.content)
+            composable(route.route, content = route.content, deepLinks = route.deepLink)
         }
     }
 }

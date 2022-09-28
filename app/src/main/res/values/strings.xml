@@ -5,6 +5,7 @@
     <string name="kushami">くしゃみ</string>
     <string name="nko">NKO</string>
     <string name="external_link">外部リンク</string>
+    <string name="soine_player">添い寝音声</string>
     <string name="birthday_countdown">誕生日カウントダウン</string>
     <string name="weekly_schedule">週間予定表</string>
     <string name="open_with">プログラムから開く</string>
@@ -31,4 +32,10 @@
     <string name="save">保存</string>
     <string name="saved_unsuccessfully">保存失敗しました</string>
     <string name="saved_successfully">保存しました</string>
+    <string name="suyasuya_channel">寝息</string>
+    <string name="suyasuya_channel_description">寝息再生してる時に表示</string>
+    <string name="suyasuya">( ˘ω˘)ｽﾔｧ</string>
+    <string name="playing_soine_sound">シオリちゃんの添い寝音声再生中</string>
+    <string name="sleep">寝る</string>
+    <string name="wake_up">起きる</string>
 </resources>

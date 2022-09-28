@@ -19,6 +19,10 @@ keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 android {
     compileSdk = 33
 
+    androidResources {
+        noCompress("flac")
+    }
+
     defaultConfig {
         applicationId = "com.yumenonaka.ymnkapp"
         minSdk = 24

@@ -7,6 +7,7 @@
     <string name="nko">NKO</string>
     <string name="external_link">外部鏈接</string>
     <string name="birthday_countdown">生日倒數</string>
+    <string name="soine_player">睡眠音聲</string>
     <string name="weekly_schedule">一周时间表</string>
     <string name="open_with">打開方式</string>
     <string name="visit_site">前往</string>
@@ -31,4 +32,10 @@
     <string name="save">保存</string>
     <string name="saved_unsuccessfully">保存失败</string>
     <string name="saved_successfully">保存成功</string>
+    <string name="suyasuya_channel">睡眠音</string>
+    <string name="suyasuya_channel_description">小栞栞睡眠音播放時顯示</string>
+    <string name="suyasuya">( ˘ω˘)zZZ</string>
+    <string name="playing_soine_sound">正在播放：小栞栞睡眠音</string>
+    <string name="sleep">睡覺</string>
+    <string name="wake_up">起床</string>
 </resources>

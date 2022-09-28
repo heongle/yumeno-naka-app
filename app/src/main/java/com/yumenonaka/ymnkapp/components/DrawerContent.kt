@@ -2,7 +2,10 @@ package com.yumenonaka.ymnkapp.components
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,8 +60,8 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState, co
                     }
                 },
                 modifier = Modifier
-                    .padding(vertical = 4.dp)
-                    .height(40.dp)
+                    .padding(vertical = 3.dp)
+                    .height(38.dp)
             )
             if(route.needDivide) {
                 Divider()
