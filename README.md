@@ -10,5 +10,5 @@
 # Used Libraries & Framework / 使ったライブラリ & フレームワーク / 使用到的框架和库
 ### [Jetpack Compose](https://developer.android.com/jetpack/compose)
 ### [Accompanist](https://github.com/google/accompanist)
-### [OkHttp 4.9.1](https://square.github.io/okhttp/)
-### [Ktor 2.0.3](https://ktor.io/)
+### [OkHttp](https://square.github.io/okhttp/)
+### [Ktor](https://ktor.io/)
