@@ -32,8 +32,8 @@
     <string name="save">保存</string>
     <string name="saved_unsuccessfully">保存失敗しました</string>
     <string name="saved_successfully">保存しました</string>
-    <string name="suyasuya_channel">寝息</string>
-    <string name="suyasuya_channel_description">寝息再生してる時に表示</string>
+    <string name="suyasuya_channel">添い寝音声</string>
+    <string name="suyasuya_channel_description">シオリちゃんの添い寝音声再生してる時に表示</string>
     <string name="suyasuya">( ˘ω˘)ｽﾔｧ</string>
     <string name="playing_soine_sound">シオリちゃんの添い寝音声再生中</string>
     <string name="sleep">寝る</string>
