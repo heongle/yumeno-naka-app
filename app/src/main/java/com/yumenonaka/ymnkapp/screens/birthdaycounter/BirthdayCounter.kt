@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -60,22 +62,27 @@ private fun CounterText(text: String) {
 @Composable
 private fun RemainingTimeCounter(currentInstantProvider: () -> Instant) {
     val context = LocalContext.current
-    val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstantProvider(), ZoneId.of("Asia/Tokyo"))
+    val untilNextBirthdayText by remember {
+        derivedStateOf {
+            val dt = getShioriBirthdayDiff(ShioriProfile.firstBirthdayInstant, currentInstantProvider(), ZoneId.of("Asia/Tokyo"))
+            "${dt.days}${context.getString(R.string.days)} " +
+            "${dt.hours}${context.getString(R.string.hours)} " +
+            "${dt.minutes}${context.getString(R.string.minutes)} " +
+            "${dt.seconds}${context.getString(R.string.seconds)}"
+        }
+    }
     CounterText(context.getString(R.string.until_next_birthday))
-    CounterText(
-        text = "${dt.days}${context.getString(R.string.days)} " +
-                "${dt.hours}${context.getString(R.string.hours)} " +
-                "${dt.minutes}${context.getString(R.string.minutes)} " +
-                "${dt.seconds}${context.getString(R.string.seconds)}"
-    )
+    CounterText(untilNextBirthdayText)
 }
 
 @Composable
 private fun AgeCounter(currentInstantProvider: () -> Instant) {
     val context = LocalContext.current
-    val totalAge = ShioriProfile.initialAge + getShioriAging(ShioriProfile.firstBirthdayInstant, currentInstantProvider())
+    val shioriTotalAge by remember {
+        derivedStateOf { ShioriProfile.initialAge + getShioriAging(ShioriProfile.firstBirthdayInstant, currentInstantProvider()) }
+    }
     CounterText(context.getString(R.string.million_age_counter))
-    CounterText("$totalAge")
+    CounterText("$shioriTotalAge")
 }
 
 @Preview(showBackground = true)
