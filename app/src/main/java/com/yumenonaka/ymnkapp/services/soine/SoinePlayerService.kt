@@ -16,6 +16,7 @@ import com.yumenonaka.ymnkapp.MainActivity
 import com.yumenonaka.ymnkapp.R
 import com.yumenonaka.ymnkapp.data.DeepLink
 import com.yumenonaka.ymnkapp.data.YmnkChannelId
+import com.yumenonaka.ymnkapp.utility.SoineRandom
 
 class SoinePlayerService: Service(), MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
     private val soineBinder = SoineBinder()
@@ -23,6 +24,7 @@ class SoinePlayerService: Service(), MediaPlayer.OnPreparedListener, MediaPlayer
     private val soineAudioPrefix = "shiori_shinnon_"
     private val soineAudioChannels = listOf("l", "r")
     private val soineNotificationId = 4021
+    private val soineRandom = SoineRandom()
 
     inner class SoineBinder: Binder() {
         // Return this instance of LocalService so clients can call public methods
@@ -121,7 +123,7 @@ class SoinePlayerService: Service(), MediaPlayer.OnPreparedListener, MediaPlayer
     }
 
     private fun getRandomSoineFd(): AssetFileDescriptor {
-        return assets.openFd("soine/$soineAudioPrefix${soineAudioChannels.random()}.flac")
+        return assets.openFd("soine/$soineAudioPrefix${soineAudioChannels[soineRandom.nextSoineIndex()]}.flac")
     }
 
     override fun onPrepared(mp: MediaPlayer) {
