@@ -8,7 +8,7 @@ workflows:
         - ymnk_app_credentials
         - github_acc
       vars:
-        APP_VERSION: v1.4.1
+        APP_VERSION: v1.4.2
       java: 11
     cache:
       cache_paths:
