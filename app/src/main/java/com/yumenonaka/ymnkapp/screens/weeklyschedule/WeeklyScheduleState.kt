@@ -12,6 +12,7 @@ import com.yumenonaka.ymnkapp.apis.getLatestWeeklyScheduleInfo
 import com.yumenonaka.ymnkapp.models.request.WeeklyScheduleInfo
 import com.yumenonaka.ymnkapp.utility.StoreImagesUtility
 import com.yumenonaka.ymnkapp.utility.extractImageFileName
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.CoroutineScope
@@ -48,6 +49,8 @@ class WeeklyScheduleState(val coroutineScope: CoroutineScope, val context: Conte
             e.printStackTrace()
             delay(3500)
             fetchData()
+        } catch (e: ResponseException) {
+            Toast.makeText(context, e.message ?: "Error", Toast.LENGTH_LONG).show()
         }
     }
 

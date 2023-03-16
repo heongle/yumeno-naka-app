@@ -22,6 +22,9 @@ fun parseScheduleData(data: List<RecentScheduleItem>): LinkedHashMap<String, Lis
 }
 
 fun parseScheduleDescription(desc: String): String {
+    if(desc.isEmpty()) {
+        return "N/A"
+    }
     return desc.replace(scheduleHtmlRegex, "")
 }
 
