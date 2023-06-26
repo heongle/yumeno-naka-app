@@ -8,8 +8,10 @@
 
 
 # Used Libraries & Framework / 使ったライブラリ & フレームワーク / 使用到的框架和库
-### [Jetpack Compose](https://developer.android.com/jetpack/compose) Apache License 2.0
-### [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) Apache License 2.0
-### [Accompanist](https://github.com/google/accompanist) Apache License 2.0
-### [OkHttp](https://square.github.io/okhttp/) Apache License 2.0
-### [Ktor](https://ktor.io/) Apache License 2.0
+| Library                                                                  | License            |
+|--------------------------------------------------------------------------|--------------------|
+| [Jetpack Compose](https://developer.android.com/jetpack/compose)         | Apache License 2.0 |
+| [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) | Apache License 2.0 |
+| [Accompanist](https://github.com/google/accompanist)                     | Apache License 2.0 |
+| [OkHttp](https://square.github.io/okhttp/)                               | Apache License 2.0 |
+| [Ktor](https://ktor.io/)                                                 | Apache License 2.0 |
