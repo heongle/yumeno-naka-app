@@ -41,11 +41,11 @@ class ScheduleState(val context: Context, val coroutineScope: CoroutineScope) {
     }
 
     fun refresh() {
-        onStart()
+        recentScheduleDataState = null
+        fetchData()
     }
 
-    fun onStart() {
-        recentScheduleDataState = null
+    fun onResume() {
         fetchData()
     }
 }

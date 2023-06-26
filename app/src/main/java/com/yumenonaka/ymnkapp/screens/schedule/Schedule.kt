@@ -32,7 +32,7 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_START) {
-                scheduleViewState.onStart()
+                scheduleViewState.onResume()
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
