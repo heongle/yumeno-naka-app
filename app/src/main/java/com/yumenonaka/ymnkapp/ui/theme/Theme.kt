@@ -81,6 +81,7 @@ fun YumenoNakaAppTheme(
 
   MaterialTheme(
     colorScheme = colors,
+    typography = Typography,
     content = content
   )
 }
