@@ -4,7 +4,7 @@ import java.io.FileInputStream
 plugins {
     id ("com.android.application")
     id ("kotlin-android")
-    kotlin("plugin.serialization") version "1.7.0"
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 val appVersion: String by project
@@ -17,10 +17,11 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdk = 33
+    namespace = "com.yumenonaka.ymnkapp"
+    compileSdk = 34
 
     androidResources {
-        noCompress("flac")
+        noCompress.add("flac")
     }
 
     defaultConfig {
@@ -82,7 +83,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = composeCompilerVersion
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -90,21 +91,21 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-    implementation ("androidx.core:core-ktx:1.9.0")
-    implementation ("androidx.appcompat:appcompat:1.5.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    implementation ("androidx.core:core-ktx:1.10.1")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material3:material3:1.0.0-beta02")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.1")
     implementation ("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation ("androidx.activity:activity-compose:1.5.1")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation ("androidx.activity:activity-compose:1.7.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation ("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation ("androidx.annotation:annotation-experimental:1.3.0")
-    implementation ("com.google.android.material:material:1.6.1")
+    implementation ("androidx.annotation:annotation-experimental:1.3.1")
+    implementation ("com.google.android.material:material:1.9.0")
     // Jetpack Compose Navigation Integration
     implementation("androidx.navigation:navigation-compose:$navVersion")
     // Testing Navigation
@@ -112,7 +113,7 @@ dependencies {
     testImplementation ("junit:junit:4.13.2")
     implementation (kotlin("script-runtime"))
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     implementation ("com.google.accompanist:accompanist-swiperefresh:0.23.1")
     // Ktor client
     implementation("io.ktor:ktor-client-core:$ktorVersion")
