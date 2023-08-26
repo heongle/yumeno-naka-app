@@ -1,14 +1,20 @@
 package com.yumenonaka.ymnkapp.screens.schedule
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -16,6 +22,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.yumenonaka.ymnkapp.apis.HttpResult
 import com.yumenonaka.ymnkapp.components.FrameScheduleDescription
 import com.yumenonaka.ymnkapp.components.LabelSchedule
 import com.yumenonaka.ymnkapp.components.ShioriLoading
@@ -24,7 +31,6 @@ import com.yumenonaka.ymnkapp.models.request.RecentSchedule
 import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
 import com.yumenonaka.ymnkapp.utility.parseScheduleData
 import com.yumenonaka.ymnkapp.utility.parseScheduleDescription
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 @Composable
@@ -41,25 +47,34 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
         }
     }
 
-    if (scheduleViewState.recentScheduleDataState == null) {
-        ShioriLoading()
-    } else {
-        ScheduleList(onSwipe = scheduleViewState::refresh, parsedScheduleItem = scheduleViewState.recentScheduleDataState!!, dateKeySet = scheduleViewState.dateKeySet!!)
+    scheduleViewState.recentSchedule.let {
+        when(it) {
+            is HttpResult.Loading -> ShioriLoading()
+            is HttpResult.Error -> {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    Text(it.message, color = Color.Red, fontWeight = FontWeight.Bold)
+                }
+            }
+            is HttpResult.Success -> {
+                ScheduleList(
+                    onSwipe = scheduleViewState::refresh,
+                    recentSchedule = it.data,
+                )
+            }
+        }
     }
 }
 
 @Composable
-private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<String, List<RecentScheduleItem>>, dateKeySet: List<String>) {
+private fun ScheduleList(onSwipe: () -> Unit, recentSchedule: List<ScheduleEventGroup>) {
     SwipeRefresh(state = rememberSwipeRefreshState(false), onRefresh = onSwipe) {
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
-            for (i in dateKeySet.indices) {
-                val scheduleDate: String = dateKeySet[i]
-                val scheduleItems: List<RecentScheduleItem> = parsedScheduleItem[scheduleDate]!!
-                TextScheduleDate(scheduleDate = scheduleDate)
-                for (scheduleItem in scheduleItems) {
-                    ScheduleItem(scheduleItem = scheduleItem)
+            for (scheduleGroup in recentSchedule) {
+                TextScheduleDate(scheduleGroup.date)
+                for (event in scheduleGroup.events) {
+                    ScheduleItem(event = event)
                 }
             }
             Box(modifier = Modifier.height(150.dp))
@@ -68,16 +83,16 @@ private fun ScheduleList(onSwipe: () -> Unit, parsedScheduleItem: LinkedHashMap<
 }
 
 @Composable
-private fun ScheduleItem(scheduleItem: RecentScheduleItem) {
+private fun ScheduleItem(event: RecentScheduleItem) {
     var isDescShowing by remember { mutableStateOf(false) }
-    val scheduleTime: String = if(scheduleItem.startTime != null) scheduleItem.startTime + "  " else ""
-    LabelSchedule(text = scheduleTime + scheduleItem.eventName) { isDescShowing = !isDescShowing }
+    val scheduleTime: String = if(event.startTime != null) event.startTime + "  " else ""
+    LabelSchedule(text = scheduleTime + event.eventName) { isDescShowing = !isDescShowing }
     AnimatedVisibility(
         visible = isDescShowing,
         enter = slideInVertically{ 0 } + expandVertically() + fadeIn(),
         exit = slideOutVertically{ 0 } + shrinkVertically() + fadeOut()
     ) {
-        FrameScheduleDescription(parseScheduleDescription(scheduleItem.description ?: "N/A"))
+        FrameScheduleDescription(parseScheduleDescription(event.description ?: "N/A"))
     }
 }
 
@@ -100,5 +115,11 @@ fun TestScheduleList() {
         ],"count":10}
     """.trimIndent())
     val parsedSchedule = parseScheduleData(data.data)
-    ScheduleList(onSwipe = {} , parsedScheduleItem = parsedSchedule, dateKeySet = ArrayList(parsedSchedule.keys))
+    val scheduleEventGroups = parsedSchedule.keys.toList().map {
+        ScheduleEventGroup(
+            date = it,
+            events = parsedSchedule[it] ?: listOf()
+        )
+    }
+    ScheduleList(onSwipe = {} , recentSchedule = scheduleEventGroups)
 }
