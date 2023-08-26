@@ -1,5 +1,9 @@
 package com.yumenonaka.ymnkapp.screens.soine
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -42,6 +46,13 @@ fun Soine(soineState: SoineState = rememberSoineState(context = LocalContext.cur
 
 @Composable
 fun SoineContent(soineState: SoineState) {
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) result@{
+        if (!it) {
+            return@result
+        }
+        soineState.toggleSoine()
+    }
+
     val context = LocalContext.current
     FullScreenImage { soineState.getSoineImage() }
     Column(
@@ -57,7 +68,13 @@ fun SoineContent(soineState: SoineState) {
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.88f)
             ),
-            onClick = soineState::toggleSoine
+            onClick = onClick@{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    return@onClick
+                }
+                soineState.toggleSoine()
+            }
         ) {
             Text(
                 fontSize = 24.sp,
