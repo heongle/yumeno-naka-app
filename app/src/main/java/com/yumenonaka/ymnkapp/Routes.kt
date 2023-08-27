@@ -1,6 +1,7 @@
 package com.yumenonaka.ymnkapp
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.*
@@ -21,22 +22,25 @@ sealed class Screen(
     @StringRes val resourceId: Int,
     val needDivide: Boolean = false,
     val deepLink: List<NavDeepLink> = emptyList(),
-    val content: @Composable (NavBackStackEntry) -> Unit,
+    val content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) {
-    object Schedule : Screen(
+    data object Schedule : Screen(
         route = "schedule",
         resourceId = R.string.schedule,
         content = { Schedule() }
     )
-    object WeeklySchedule : Screen(
+
+    data object WeeklySchedule : Screen(
         route = "weekly-schedule",
         resourceId = R.string.weekly_schedule,
         content = { WeeklySchedule() })
-    object BirthdayCountdown : Screen(
+
+    data object BirthdayCountdown : Screen(
         route = "birthday-countdown",
         resourceId = R.string.birthday_countdown,
         content = { BirthdayCounter() })
-    object Soine : Screen(
+
+    data object Soine : Screen(
         route = "soine",
         resourceId = R.string.soine_player,
         deepLink = listOf(
@@ -48,23 +52,22 @@ sealed class Screen(
         },
         needDivide = true
     )
-    object SoundEffect : Screen(
+
+    data object SoundEffect : Screen(
         route = "sound-effect",
         resourceId = R.string.sound_effect,
-        content = { SoundEffectButtons(soundEffects) }
+        content = {
+            SoundEffectButtons(
+                listOf(
+                    Pair(R.string.sound_effect, soundEffects),
+                    Pair(R.string.kushami, kushamiEffects),
+                    Pair(R.string.nko, nkoEffects)
+                )
+            )
+        }
     )
-    object Kushami : Screen(
-        route = "sound-effect-kushami",
-        resourceId = R.string.kushami,
-        content = { SoundEffectButtons(kushamiEffects) }
-    )
-    object NKO : Screen(
-        route = "sound-effect-nko",
-        resourceId = R.string.nko,
-        content = { SoundEffectButtons(nkoEffects) },
-        needDivide = true
-    )
-    object ExternalLink : Screen(
+
+    data object ExternalLink : Screen(
         route = "external-links",
         resourceId = R.string.external_link,
         content = { Links() }
@@ -77,7 +80,5 @@ val routes = listOf(
     Screen.BirthdayCountdown,
     Screen.Soine,
     Screen.SoundEffect,
-    Screen.Kushami,
-    Screen.NKO,
     Screen.ExternalLink
 )

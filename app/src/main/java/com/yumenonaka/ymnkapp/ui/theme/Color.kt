@@ -1,7 +1,7 @@
 package com.yumenonaka.ymnkapp.ui.theme
 import androidx.compose.ui.graphics.Color
 
-val md_theme_light_primary = Color(0xFF942CB0)
+val md_theme_light_primary = Color(0xFF7D42AD)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFDD6FF)
 val md_theme_light_onPrimaryContainer = Color(0xFF340042)

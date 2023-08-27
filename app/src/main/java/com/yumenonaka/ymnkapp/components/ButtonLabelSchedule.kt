@@ -1,5 +1,6 @@
 package com.yumenonaka.ymnkapp.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ fun LabelSchedule(text: String, onClick: ()-> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp),
+        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
         shape = RoundedCornerShape(15.dp),
         onClick = onClick
     ) {

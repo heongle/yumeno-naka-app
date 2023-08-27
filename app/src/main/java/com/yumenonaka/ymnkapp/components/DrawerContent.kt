@@ -3,22 +3,23 @@ package com.yumenonaka.ymnkapp.components
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -28,7 +29,6 @@ import kotlinx.coroutines.launch
 
 private val drawerImageList = listOf("img1", "img2", "img3", "img4", "img5", "img6", "img7", "img8", "img9", "img10", "img11", "img12", "img13")
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Drawer(navController: NavHostController, drawerState: DrawerState, coroutineScope: CoroutineScope) {
     val context = LocalContext.current
@@ -39,7 +39,6 @@ fun Drawer(navController: NavHostController, drawerState: DrawerState, coroutine
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrawerContent(navController: NavHostController, drawerState: DrawerState, coroutineScope: CoroutineScope) {
     val context = LocalContext.current
@@ -60,17 +59,16 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState, co
                     }
                 },
                 modifier = Modifier
-                    .padding(vertical = 3.dp)
+                    .padding(vertical = 2.dp)
                     .height(38.dp)
             )
             if(route.needDivide) {
-                Divider()
+                Divider(Modifier.padding(vertical = 4.dp))
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DrawerHeaderImage(drawerState: DrawerState, headerImages: List<ImageBitmap>) {
     val prevState = remember { mutableStateOf(DrawerValue.Closed) }
@@ -80,32 +78,4 @@ private fun DrawerHeaderImage(drawerState: DrawerState, headerImages: List<Image
     }
     prevState.value = drawerState.currentValue
     Image(bitmap = showingImg.value, contentDescription = "")
-}
-
-@Composable
-private fun ButtonMenu(text: String, onClick: () -> Unit, selected: Boolean) {
-    val buttonColors = if(selected) {
-        ButtonDefaults.textButtonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.primary
-        )
-    } else {
-        ButtonDefaults.textButtonColors(
-            containerColor = Color.Transparent,
-            contentColor = Color.Black
-        )
-    }
-
-    TextButton(
-        modifier = Modifier.fillMaxWidth(),
-        colors = buttonColors,
-        onClick = onClick
-    ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            fontSize = 18.sp,
-            textAlign = TextAlign.Left,
-            text = text
-        )
-    }
 }

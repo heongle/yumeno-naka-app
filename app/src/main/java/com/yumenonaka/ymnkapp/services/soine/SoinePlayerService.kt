@@ -119,6 +119,7 @@ class SoinePlayerService: Service(), MediaPlayer.OnPreparedListener, MediaPlayer
             .setContentText(getString(R.string.playing_soine_sound))
             .setContentIntent(intent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setOngoing(true)
             .build()
     }
 
