@@ -15,3 +15,8 @@
 | [Accompanist](https://github.com/google/accompanist)                     | Apache License 2.0 |
 | [OkHttp](https://square.github.io/okhttp/)                               | Apache License 2.0 |
 | [Ktor](https://ktor.io/)                                                 | Apache License 2.0 |
+
+# Used Font / 使ったフォント / 字体
+| Font                                             | License                   |
+|--------------------------------------------------|---------------------------|
+| [Yozai Font](https://github.com/lxgw/yozai-font) | SIL Open Font License 1.1 |
