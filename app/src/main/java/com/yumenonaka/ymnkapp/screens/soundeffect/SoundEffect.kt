@@ -33,7 +33,7 @@ fun SoundEffectButtons(
          TabRow(selectedTabIndex = soundEffectState.currentTab) {
              for (index in soundEffectsList.indices) {
                  Tab(
-                     selected = true,
+                     selected = index == soundEffectState.currentTab,
                      onClick = { soundEffectState.changeTab(index) }
                  ) {
                      Text(context.getString(soundEffectsList[index].first), Modifier.padding(vertical = 12.dp))
