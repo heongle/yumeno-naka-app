@@ -60,6 +60,9 @@ class SoundEffectState(
     }
 
     fun changeTab(tabIndex: Int) {
+        if(currentTab == tabIndex) {
+            return
+        }
         currentTab = tabIndex
         coroutineScope.launch {
             loadSoundEffects(soundEffectsList[tabIndex].second)
