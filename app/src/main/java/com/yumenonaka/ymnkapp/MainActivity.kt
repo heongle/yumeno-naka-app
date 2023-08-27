@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -25,7 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         content = { innerPadding ->
                             Box(
                                 modifier = Modifier
-                                    .consumedWindowInsets(innerPadding)
+                                    .consumeWindowInsets(innerPadding)
                                     .padding(innerPadding),
                             ) {
                                 Router(navController)
@@ -67,7 +67,7 @@ fun YumenoTopBar(
     val currentDestination = navBackStackEntry?.destination
     val currentRoute = routes.find { it.route == currentDestination?.route }
     TopAppBar(
-        colors = TopAppBarDefaults.smallTopAppBarColors(
+        colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color(0xff8445de),
             titleContentColor = Color.White
         ),
