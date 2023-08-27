@@ -9,7 +9,7 @@ workflows:
         - github_acc
       vars:
         APP_VERSION: v1.4.7
-      java: 11
+      java: 17
     cache:
       cache_paths:
         - ~/.gradle/caches
