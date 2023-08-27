@@ -29,14 +29,17 @@ sealed class Screen(
         resourceId = R.string.schedule,
         content = { Schedule() }
     )
+
     data object WeeklySchedule : Screen(
         route = "weekly-schedule",
         resourceId = R.string.weekly_schedule,
         content = { WeeklySchedule() })
+
     data object BirthdayCountdown : Screen(
         route = "birthday-countdown",
         resourceId = R.string.birthday_countdown,
         content = { BirthdayCounter() })
+
     data object Soine : Screen(
         route = "soine",
         resourceId = R.string.soine_player,
@@ -49,22 +52,21 @@ sealed class Screen(
         },
         needDivide = true
     )
+
     data object SoundEffect : Screen(
         route = "sound-effect",
         resourceId = R.string.sound_effect,
-        content = { SoundEffectButtons(soundEffects) }
+        content = {
+            SoundEffectButtons(
+                listOf(
+                    Pair(R.string.sound_effect, soundEffects),
+                    Pair(R.string.kushami, kushamiEffects),
+                    Pair(R.string.nko, nkoEffects)
+                )
+            )
+        }
     )
-    data object Kushami : Screen(
-        route = "sound-effect-kushami",
-        resourceId = R.string.kushami,
-        content = { SoundEffectButtons(kushamiEffects) }
-    )
-    data object NKO : Screen(
-        route = "sound-effect-nko",
-        resourceId = R.string.nko,
-        content = { SoundEffectButtons(nkoEffects) },
-        needDivide = true
-    )
+
     data object ExternalLink : Screen(
         route = "external-links",
         resourceId = R.string.external_link,
@@ -78,7 +80,5 @@ val routes = listOf(
     Screen.BirthdayCountdown,
     Screen.Soine,
     Screen.SoundEffect,
-    Screen.Kushami,
-    Screen.NKO,
     Screen.ExternalLink
 )
