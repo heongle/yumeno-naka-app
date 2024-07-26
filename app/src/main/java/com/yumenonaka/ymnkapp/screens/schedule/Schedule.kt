@@ -1,16 +1,26 @@
 package com.yumenonaka.ymnkapp.screens.schedule
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -26,6 +36,7 @@ import com.yumenonaka.ymnkapp.apis.HttpResult
 import com.yumenonaka.ymnkapp.components.FrameScheduleDescription
 import com.yumenonaka.ymnkapp.components.LabelSchedule
 import com.yumenonaka.ymnkapp.components.ShioriLoading
+import com.yumenonaka.ymnkapp.components.ShioriLoadingIndicator
 import com.yumenonaka.ymnkapp.components.TextScheduleDate
 import com.yumenonaka.ymnkapp.models.request.RecentSchedule
 import com.yumenonaka.ymnkapp.models.request.RecentScheduleItem
@@ -47,7 +58,7 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
         }
     }
 
-    scheduleViewState.recentSchedule.let {
+    scheduleViewState.recentSchedule().let {
         when(it) {
             is HttpResult.Loading -> ShioriLoading()
             is HttpResult.Error -> {
@@ -58,7 +69,7 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
             is HttpResult.Success -> {
                 ScheduleList(
                     onSwipe = scheduleViewState::refresh,
-                    recentSchedule = it.data,
+                    recentSchedule = it,
                 )
             }
         }
@@ -66,18 +77,33 @@ fun Schedule(scheduleViewState: ScheduleState = rememberScheduleState(), lifecyc
 }
 
 @Composable
-private fun ScheduleList(onSwipe: () -> Unit, recentSchedule: List<ScheduleEventGroup>) {
-    SwipeRefresh(state = rememberSwipeRefreshState(false), onRefresh = onSwipe) {
-        Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
-        ) {
-            for (scheduleGroup in recentSchedule) {
-                TextScheduleDate(scheduleGroup.date)
-                for (event in scheduleGroup.events) {
-                    ScheduleItem(event = event)
-                }
+private fun ScheduleList(onSwipe: () -> Unit, recentSchedule: HttpResult.Success<List<ScheduleEventGroup>>) {
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(false),
+        onRefresh = onSwipe,
+        swipeEnabled = !recentSchedule.isValidating,
+    ) {
+        Column {
+            AnimatedVisibility(
+                visible = recentSchedule.isValidating,
+                enter = expandVertically() + fadeIn(),
+                exit = shrinkVertically() + fadeOut()
+            ) {
+                ShioriLoadingIndicator(
+                    Modifier.fillMaxWidth().padding(5.dp)
+                )
             }
-            Box(modifier = Modifier.height(150.dp))
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
+                for (scheduleGroup in recentSchedule.data) {
+                    TextScheduleDate(scheduleGroup.date)
+                    for (event in scheduleGroup.events) {
+                        ScheduleItem(event = event)
+                    }
+                }
+                Box(modifier = Modifier.height(150.dp))
+            }
         }
     }
 }
@@ -89,8 +115,8 @@ private fun ScheduleItem(event: RecentScheduleItem) {
     LabelSchedule(text = scheduleTime + event.eventName) { isDescShowing = !isDescShowing }
     AnimatedVisibility(
         visible = isDescShowing,
-        enter = slideInVertically{ 0 } + expandVertically() + fadeIn(),
-        exit = slideOutVertically{ 0 } + shrinkVertically() + fadeOut()
+        enter = expandVertically() + fadeIn(),
+        exit = shrinkVertically() + fadeOut()
     ) {
         FrameScheduleDescription(parseScheduleDescription(event.description ?: "N/A"))
     }
@@ -121,5 +147,5 @@ fun TestScheduleList() {
             events = parsedSchedule[it] ?: listOf()
         )
     }
-    ScheduleList(onSwipe = {} , recentSchedule = scheduleEventGroups)
+    ScheduleList(onSwipe = {} , recentSchedule = HttpResult.Success(scheduleEventGroups, true))
 }
