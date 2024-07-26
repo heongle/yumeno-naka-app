@@ -4,7 +4,7 @@ import java.io.FileInputStream
 plugins {
     id ("com.android.application")
     id ("kotlin-android")
-    kotlin("plugin.serialization") version "1.9.0"
+    kotlin("plugin.serialization") version "1.9.24"
 }
 
 val appVersion: String by project
@@ -27,7 +27,7 @@ android {
     defaultConfig {
         applicationId = "com.yumenonaka.ymnkapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = appVersion
 
@@ -59,6 +59,8 @@ android {
             buildConfigField("String", "YMNK_API_URL", "\"https://www.yumeno-naka.moe/yumeno_api\"")
             buildConfigField("String", "YMNK_CDN_URL", "\"https://cdn.yumeno-naka.moe\"")
             signingConfig = signingConfigs.getByName("release-sign")
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+            manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
         }
 
         debug {
@@ -66,6 +68,8 @@ android {
             versionNameSuffix = "-debug"
             buildConfigField("String", "YMNK_API_URL", "\"https://www.yumeno-naka.moe/yumeno_api\"")
             buildConfigField("String", "YMNK_CDN_URL", "\"https://cdn.yumeno-naka.moe\"")
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_dev"
+            manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_dev_round"
         }
     }
 
@@ -91,21 +95,21 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
-    implementation ("androidx.core:core-ktx:1.10.1")
-    implementation ("androidx.appcompat:appcompat:1.6.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    implementation ("androidx.core:core-ktx:1.13.1")
+    implementation ("androidx.appcompat:appcompat:1.7.0")
     implementation ("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material3:material3:1.1.1")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
     implementation ("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation ("androidx.activity:activity-compose:1.7.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
+    implementation ("androidx.activity:activity-compose:1.9.1")
+    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation ("androidx.compose.ui:ui-tooling:$composeVersion")
-    implementation ("androidx.annotation:annotation-experimental:1.3.1")
-    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("androidx.annotation:annotation-experimental:1.4.1")
+    implementation ("com.google.android.material:material:1.12.0")
     // Jetpack Compose Navigation Integration
     implementation("androidx.navigation:navigation-compose:$navVersion")
     // Testing Navigation
@@ -113,7 +117,7 @@ dependencies {
     testImplementation ("junit:junit:4.13.2")
     implementation (kotlin("script-runtime"))
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation ("com.google.accompanist:accompanist-swiperefresh:0.23.1")
     // Ktor client
     implementation("io.ktor:ktor-client-core:$ktorVersion")
