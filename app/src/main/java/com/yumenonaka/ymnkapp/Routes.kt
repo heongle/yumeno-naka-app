@@ -8,6 +8,7 @@ import androidx.navigation.*
 import com.yumenonaka.ymnkapp.data.DeepLink
 import com.yumenonaka.ymnkapp.screens.birthdaycounter.BirthdayCounter
 import com.yumenonaka.ymnkapp.screens.links.Links
+import com.yumenonaka.ymnkapp.screens.ramentimer.RamenTimer
 import com.yumenonaka.ymnkapp.screens.schedule.Schedule
 import com.yumenonaka.ymnkapp.screens.soine.Soine
 import com.yumenonaka.ymnkapp.screens.soine.rememberSoineState
@@ -39,6 +40,11 @@ sealed class Screen(
         route = "birthday-countdown",
         resourceId = R.string.birthday_countdown,
         content = { BirthdayCounter() })
+
+    data object RamenTimer : Screen(
+        route = "ramen-timer",
+        resourceId = R.string.ramen_timer,
+        content = { RamenTimer() })
 
     data object Soine : Screen(
         route = "soine",
@@ -78,6 +84,7 @@ val routes = listOf(
     Screen.Schedule,
     Screen.WeeklySchedule,
     Screen.BirthdayCountdown,
+    Screen.RamenTimer,
     Screen.Soine,
     Screen.SoundEffect,
     Screen.ExternalLink

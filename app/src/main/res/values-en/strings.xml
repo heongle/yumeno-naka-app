@@ -39,4 +39,8 @@
     <string name="playing_soine_sound">Playing Shiori sleeping sound</string>
     <string name="sleep">Sleep</string>
     <string name="wake_up">Wake Up</string>
+    <string name="ramen_timer">Noodle Stopper</string>
+    <string name="sound_type">Sound Effect</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>

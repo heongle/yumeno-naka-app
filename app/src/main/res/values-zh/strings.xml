@@ -39,4 +39,8 @@
     <string name="playing_soine_sound">正在播放：小栞栞睡眠音</string>
     <string name="sleep">睡觉</string>
     <string name="wake_up">起床</string>
+    <string name="ramen_timer">杯面计时器</string>
+    <string name="sound_type">音效</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
 </resources>

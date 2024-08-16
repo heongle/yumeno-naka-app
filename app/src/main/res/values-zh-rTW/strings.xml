@@ -22,6 +22,7 @@
     <string name="cien">Ci-en</string>
     <string name="booth">BOOTH</string>
     <string name="fantia">Fantia</string>
+    <string name="fc2">FC2</string>
     <string name="until_next_birthday">直到下次生日還有</string>
     <string name="million_age_counter">一億〇計數器</string>
     <string name="days">天</string>
@@ -38,4 +39,8 @@
     <string name="playing_soine_sound">正在播放：小栞栞睡眠音</string>
     <string name="sleep">睡覺</string>
     <string name="wake_up">起床</string>
+    <string name="ramen_timer">杯面計時器</string>
+    <string name="sound_type">音效</string>
+    <string name="start">開始</string>
+    <string name="stop">停止</string>
 </resources>
